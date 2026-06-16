@@ -132,23 +132,51 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
-        title: const Text("Expense Tracker"),
+        title: const Text("Expense Tracker",
+        style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+
         centerTitle: true,
+        backgroundColor: Colors.amber,
       ),
 
       body: Column(
         children: [
-          Card(
-            margin: const EdgeInsets.all(7),
-            child: Padding(
-              padding: const EdgeInsets.all(14),
-              child: Text(
-                "Total Expense:"+TotalExpense().toString(),
-                style: const TextStyle(fontSize: 22,
-                  fontWeight: FontWeight.bold,
+          Container(
+            margin: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(10),
+
+            decoration: BoxDecoration(
+              color: Colors.amberAccent,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              children: [
+                const Text(
+                  'Total Expense',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
+
+            const SizedBox(height: 10),
+
+            Text(
+                  '₹'+TotalExpense().toString(),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                )
+              ],
             ),
           ),
 
@@ -156,16 +184,20 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ListView.builder(
               itemCount: expenses.length,
               itemBuilder: (context, index) {
-                return Card(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 5,
+                return Card (
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: ListTile(
                     leading: const Icon(Icons.money),
 
                     title: Text(
                       expenses[index].title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
                     ),
 
                     subtitle: Text(
@@ -179,6 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           "₹"+expenses[index].amount.toString(),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
+                            fontSize: 15,
                           ),
                         ),
 
@@ -201,7 +234,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: addExpense,
-        child: const Icon(Icons.add),
+        backgroundColor: Colors.amber,
+        child: const Text("Add"),
       ),
     );
   }
